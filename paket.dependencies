@@ -1,0 +1,8 @@
+storage: none
+framework: auto-detect
+source https://api.nuget.org/v3/index.json
+
+nuget Giraffe
+nuget Giraffe.Htmx
+nuget Giraffe.ViewEngine
+nuget Giraffe.ViewEngine.Htmx
