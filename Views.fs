@@ -27,16 +27,31 @@ let layout (content: XmlNode list) =
                    _type "text/css"
                    _href "/main.css" ]
             Htmx.Script.minified
+            link [_rel "stylesheet"; _href "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.80/dist/themes/light.css"]
+            script [_type "module"; _src "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.80/dist/shoelace.js" ] []
             script [ _src "https://unpkg.com/hyperscript.org@0.9.7" ] []
         ]
         body [] content
     ]
 
-let partial () = h1 [] [ encodedText "GHTMX" ]
+let sl_button = tag "sl-button"
+let sl_input = tag "sl-input"
 
 let index (model: Message) =
-    [ partial ()
-      autoload
-      togglebutton
-      p [] [ encodedText model.Text ] ]
+    [ //partial ()
+      //autoload
+      //togglebutton
+      // p [] [ encodedText model.Text ]
+      header [] [
+          sl_button [] [ encodedText "Login"]
+          sl_button [] [ encodedText "Register" ]
+      ]
+      main [] [
+          h1 [] [ encodedText "Your Todo List" ]
+          sl_input [ _type "text"; _placeholder "Enter New Task" ] []
+          sl_button [] [ encodedText "Create task"]
+      ]
+      footer [ _class "footer" ] [
+          p [] [ encodedText "GHTMX" ]
+      ] ]
     |> layout
