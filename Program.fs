@@ -11,6 +11,7 @@ open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Giraffe.Htmx
 open Views
+open Giraffe.ViewEngine
 
 let indexHandler (name: string) =
     let greetings = sprintf "Hello %s, from Giraffe!" name
@@ -20,7 +21,7 @@ let indexHandler (name: string) =
 
 let webApp =
     choose [ GET
-             >=> choose [ route "/lazy-load-data" >=> text "Hello Onur"
+             >=> choose [ route "/lazy-load-data" >=> htmlView ( h1 [ attr "x-data" "{ message: 'I ❤️ Alpin3e' }"; attr "x-text" "message"] [])
                           route "/" >=> indexHandler "world"
                           routef "/hello/%s" indexHandler ]
              setStatusCode 404 >=> text "Not Found" ]
